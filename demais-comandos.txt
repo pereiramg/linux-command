@@ -67,20 +67,69 @@ Variáveis de ambiente -- printenv / env ------------------------------ Exemplo:
 
 
 ========== CPU, memória, disco ==========
-Uso de memória		free -h / vmstat 1
-Disco e partições	lsblk -f, blkid, fdisk -l	--------- Exemplo: lsblk -f
-Uso de filesystem ---- df -h
-Montagem	mount, /etc/fstab ------------	mount /dev/sdb1 /mnt
+Uso de memória ----------------- free -h / vmstat 1
+Disco e partições -------------- lsblk -f, blkid, fdisk -l	--------- Exemplo: lsblk -f
+Uso de filesystem -------------- df -h
+Montagem ----------------------- mount, /etc/fstab ------------------ Exemplo: mount /dev/sdb1 /mnt
 
 
-==========
+========== Rede ==========
+IP/links/rotas ------------------- ip a, ip r, ip link ------------------ Exemplo:	ip r
+Gerenciar conexões --------------- nmcli (NetworkManager) --------------- Exemplo: nmcli con show
+DNS atual ------------------------ resolvectl status
+Flush DNS ------------------------ resolvectl flush-caches ou systemd-resolved/nscd
+Teste de rede -------------------- ping, traceroute, curl, nc	----------- Exemplo: curl -I https://redhat.com
+Portas abertas ------------------- ss -tulpen
+Firewall ------------------------- firewall-cmd (firewalld) -------------	Exemplo: firewall-cmd --list-all
 
 
+========== Pacotes / Atualizações ==========
+Atualizar ----------------- dnf upgrade -y
+Instalar pacote ----------- dnf install <pkg> ------ Exemplo: dnf install htop
+Remover pacote ------------ dnf remove <pkg>
+Repositórios -------------- dnf repolist
 
-==========
+
+========== Usuários e grupos ==========
+Listar usuários/grupos ---------------- getent passwd, getent group
+Criar usuário ------------------------- useradd <user> ; passwd <user>
+Criar grupo --------------------------- groupadd <group>
+Membros do grupo ---------------------- groups <user> / id <user>
+Expiração/senha ----------------------- chage -l <user>
+sudo (elevação) ----------------------- usermod -aG wheel <user> ; /etc/sudoers.d/
 
 
-==========
+========== Agendamentos ==========
+Tarefas agendadas -------- crontab -l, /etc/crontab -------- Exemplo: crontab -e
+Timers systemd ----------- systemctl list-timers ----------- Exemplo: systemctl enable --now my.timer
 
 
-==========
+========== Data/hora e NTP ==========
+Ver/Ajustar hora ---------- timedatectl -------------- Exemplo: timedatectl set-timezone America/Sao_Paulo
+NTP/Chrony ---------------- chronyc sources / chronyc tracking
+
+
+========== SELinux e segurança ==========
+Status SELinux ---------- getenforce / sestatus
+Políticas/Contextos ----- semanage fcontext, restorecon, chcon
+Capabilities ------------ getcap, setcap
+
+
+========== Sistema (energia e boot) ==========
+Reiniciar/Desligar ------------ systemctl reboot, systemctl poweroff
+Serviços no boot -------------- systemctl enable/disable
+Targets (runlevels) ----------- systemctl get-default / set-default
+
+
+========== Arquivos e compactação ==========
+Listar/copiar/mover/remover ------------- ls, cp, mv, rm
+Buscar arquivos ------------------------- find, fd (extra) -------- Exemplo: find /var -name "*.log"
+Compactar ------------------------------- tar czf, zip ------------ Exemplo: tar czf logs.tgz /var/log
+Descompactar ---------------------------- tar xzf, unzip ---------- Exemplo: tar xzf logs.tgz -C /tmp
+
+
+========== Remoto ==========
+Sessão remota ---------------- ssh user@host
+Copiar remoto ---------------- scp, rsync ----------- Exemplo: rsync -avz /data host:/data
+
+
