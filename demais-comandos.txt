@@ -1,11 +1,11 @@
 
 ========== Valida o status do serviço sshd (ssh) ==========
-systemctl status sshd
-  start
-  stop
-  restart
-  disable
-  enable
+  systemctl status sshd
+    start
+    stop
+    restart
+    disable
+    enable
 
 ========== Listar portas ==========
   netstat -tulpn | grep ssh
@@ -35,3 +35,52 @@ systemctl status sshd
   ss -tulpn | grep ssh
 
 
+========== Processos ==========
+Listar processos ---------- ps aux, top, htop ----------------------- Exemplo: ps aux
+Filtrar por nome ---------- ps aux | grep chrome / pgrep chrome -a -- Exemplo: pgrep sshd -a
+Árvore de processos ------- pstree -p (instalar psmisc) ------------- Exemplo: pstree -p 1
+Abrir arquivos de um PID -- lsof -p <PID> --------------------------- Exemplo: lsof -p 1234
+Processos por porta ------- ss -tulpen / lsof -i :PORT -------------- Exemplo: lsof -i :44
+
+
+========== Serviços (systemd) ==========
+Listar serviços (ativos) --------- systemctl list-units --type=service
+Todos os serviços instalados ----- systemctl list-unit-files --type=service
+Status de um serviço ------------- systemctl status sshd
+Iniciar/Parar/Reiniciar ---------- systemctl start/stop/restart <svc>	-------- Exemplo: systemctl restart httpd
+Habilitar no boot ---------------- systemctl enable <svc>
+Ver logs do serviço -------------- journalctl -u <svc> ----------------------- Exemplo: journalctl -u sshd --since "1 hour ago"
+
+
+========== Logs / Eventos ==========
+Eventos do sistema ------------- journalctl -p notice..emerg	----------- Exemplo: journalctl -k (kernel)
+Seguir em tempo real ----------- journalctl -f
+Filtro por boot / tempo -------- journalctl -b / --since "2025-10-18 08:00"
+
+
+========== Informações do sistema ==========
+Versão do SO ----------- cat /etc/os-release / hostnamectl
+Kernel ----------------- uname -r
+Uptime ----------------- uptime
+Hardware resumido ------ lshw -short (instalar) / lscpu / lsmem -------- Exemplo: lscpu
+Variáveis de ambiente -- printenv / env ------------------------------ Exemplo: echo $PATH
+
+
+========== CPU, memória, disco ==========
+Uso de memória		free -h / vmstat 1
+Disco e partições	lsblk -f, blkid, fdisk -l	--------- Exemplo: lsblk -f
+Uso de filesystem ---- df -h
+Montagem	mount, /etc/fstab ------------	mount /dev/sdb1 /mnt
+
+
+==========
+
+
+
+==========
+
+
+==========
+
+
+==========
