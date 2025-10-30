@@ -32,4 +32,6 @@ systemctl status sshd
         -C, --cache              display routing cache instead of FIB
         -Z, --context            display SELinux security context for sockets
 
+  ss -tulpn | grep ssh
+
 
