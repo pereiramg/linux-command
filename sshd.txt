@@ -1,1 +1,34 @@
+o serviço sshd falhou ao iniciar — o código 255 quase sempre indica erro de configuração no arquivo /etc/ssh/sshd_config
 
+====== local de configuração ======
+  /etc/ssh/sshd_config
+
+====== Testar se conecta ======
+  ssh localhost
+
+====== Verificar os logs ======
+  journalctl -u sshd -xe
+  ou
+  cat /var/log/secure | tail -30
+
+
+Procure linhas começando com sshd: — normalmente aparece algo como:
+sshd[XXXX]: /etc/ssh/sshd_config line 15: Bad configuration option
+sshd[XXXX]: /etc/ssh/sshd_config line 25: Missing argument
+sshd[XXXX]: Missing host key
+
+====== Teste o arquivo de configuração ======
+  /usr/sbin/sshd -t
+
+Porta inválida ou duplicada --> 	Edite /etc/ssh/sshd_config e garanta que tenha Port 22 (sem #)
+Linha incorreta adicionada (por Puppet, Ansible etc.)  -->	Remova ou comente a linha problemática
+Chaves de host ausentes --> 	Gere novamente com: ssh-keygen -A
+Permissões erradas nas chaves	-->  Corrija: chmod 600 /etc/ssh/ssh_host_*
+Arquivo corrompido -->  	Restaure o original: cp /etc/ssh/sshd_config.rpmnew /etc/ssh/sshd_config (se existir)
+
+====== comparar o arquivo com o padrão original do pacote ======
+  diff /etc/ssh/sshd_config /usr/share/openssh/sshd_config
+
+====== Corrija permissões ======
+chmod 600 /etc/ssh/ssh_host_*
+chown root:root /etc/ssh/ssh_host_*
