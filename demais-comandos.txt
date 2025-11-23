@@ -132,4 +132,11 @@ Descompactar ---------------------------- tar xzf, unzip ---------- Exemplo: tar
 Sessão remota ---------------- ssh user@host
 Copiar remoto ---------------- scp, rsync ----------- Exemplo: rsync -avz /data host:/data
 
+========== Auditoria e segurança =============
+last -a | grep -v "reboot" ------------------------ Mostra o histórico de logins, apenas os logins reais (sem reboots)
+last root ----------------------------------------- Ver o último login de um usuário específico
+lastlog ------------------------------------------- mostra o último login de todos os usuários
+lastlog -u usuário -------------------------------- Para ver apenas um usuário
+lastb --------------------------------------------- Ver logins falhos
+journalctl _COMM=sshd | grep "Accepted" ----------- Ver logins via journal
 
