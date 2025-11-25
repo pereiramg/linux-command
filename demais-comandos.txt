@@ -50,7 +50,7 @@ Status de um serviço ------------- systemctl status sshd
 Iniciar/Parar/Reiniciar ---------- systemctl start/stop/restart <svc>	-------- Exemplo: systemctl restart httpd
 Habilitar no boot ---------------- systemctl enable <svc>
 Ver logs do serviço -------------- journalctl -u <svc> ----------------------- Exemplo: journalctl -u sshd --since "1 hour ago"
-
+systemctl list-units --type=service --all | grep -i serviço
 
 ========== Logs / Eventos ==========
 Eventos do sistema ------------- journalctl -p notice..emerg	----------- Exemplo: journalctl -k (kernel)
