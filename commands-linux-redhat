@@ -1,1 +1,16 @@
 
+
+ls -- Lista conteudo de um diretorio
+  -l -- formato lista longa
+  -a -- listar tudo
+  -t -- Ordenar a lista em ordem cronologica - time
+mv - Mover aquivo ou pasta
+nano -- Editor padrão de arquivos
+pwd -- Diretorio atual
+rm -- Deletar
+  -d -- Deletar pastas vazias
+  -f -- Force
+  -r / -R -- modo recursivo
+rmdir -- Remover um diretorio vazio
+
+
