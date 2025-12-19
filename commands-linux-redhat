@@ -1,10 +1,16 @@
 
 
+cat --  exibe o conteúdo de um arquivo no terminal
+cp -- Copia um arquivo ou diretorio
+  -r -- Recursivo. Ex.: cp -r dir1/* dir2
+echo -- Exibe a string especificada
 ls -- Lista conteudo de um diretorio
   -l -- formato lista longa
   -a -- listar tudo
   -t -- Ordenar a lista em ordem cronologica - time
 mv - Mover aquivo ou pasta
+mkdir -- Criação de diretorios
+  -p -- Cria toda a cadeia de diretorios ex.: /devops/app/src
 nano -- Editor padrão de arquivos
 pwd -- Diretorio atual
 rm -- Deletar
@@ -12,5 +18,8 @@ rm -- Deletar
   -f -- Force
   -r / -R -- modo recursivo
 rmdir -- Remover um diretorio vazio
+touch -- Cria arquivos vazios. Ex.: touch data1 data2
+
+
 
 
