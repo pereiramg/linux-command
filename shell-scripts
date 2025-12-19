@@ -1,0 +1,40 @@
+# ==================================================================
+
+#! /bin/bash
+
+diretorio_backup="/home/galdper/devops"
+nome_arquivo="backup_$(date +%Y%m%d_%H%M%S).tar.gz"
+tar -czf "$nome_arquivo" "diretorio_backup"
+echo "Backup concluido em $nome_arquivo"
+
+
+# ==================================================================
+
+chmod +x backup.sh
+bash backup.sh
+
+
+# ==================================================================
+
+# Trabalhando com condição
+if [condição]; then
+	# bloco de codigo
+elif [outra condição]; then
+	# bloco  2
+else
+	# bloco
+fi
+
+# ==================================================================
+
+# Operadores
+	=		Igualdade
+	!=		Desigualdade entre duas strings
+	-eq		Igualdade entre dois números
+	-ne		Desigualdade entre dois números
+	-gt		maior que
+	-lt		Menor que
+	-ge		maior ou igual
+	-e "/caminho"	Verificando a existencia de um diretorio ou arquivo
+
+# ==================================================================
