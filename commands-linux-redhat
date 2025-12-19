@@ -18,6 +18,15 @@ rm -- Deletar
   -f -- Force
   -r / -R -- modo recursivo
 rmdir -- Remover um diretorio vazio
+tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único arquivo Ex.: tar -czf "$arquivo_backup" "$diretorio_backup"
+  -c -- Criar
+  -x -- Extrair
+  -v -- Verificar ou listar
+  -f -- Define o nome do arquivo (sempre usado antes do nome do arquivo).
+  -v -- Modo verboso, mostra o progresso.
+  -z -- Comprime o arquivo usando gzip.
+  -j -- Comprime o arquivo usando bzip2 (maior compressão, mas mais lento).
+  -C -- Especifica um diretório de destino para a extração. 
 touch -- Cria arquivos vazios. Ex.: touch data1 data2
 
 
