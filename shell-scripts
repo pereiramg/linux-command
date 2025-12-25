@@ -1,22 +1,6 @@
-# ==================================================================
-
-#! /bin/bash
-
-diretorio_backup="/home/galdper/devops"
-nome_arquivo="backup_$(date +%Y%m%d_%H%M%S).tar.gz"
-tar -czf "$nome_arquivo" "diretorio_backup"
-echo "Backup concluido em $nome_arquivo"
-
-
-# ==================================================================
-
-chmod +x backup.sh
-bash backup.sh
-
-
-# ==================================================================
-
 # Trabalhando com condição
+
+===== if =====
 if [condição]; then
 	# bloco de codigo
 elif [outra condição]; then
@@ -25,11 +9,20 @@ else
 	# bloco
 fi
 
-==== for ===
+====== for =====
 for i in {1..5}
 do
   echo $i
 done
+
+===== case =====
+case "$operacao" in
+        "compactar") #Aqui é o valor dentro da variavel $operação
+		;; #Usado para fechar esse bloco
+        "descompactar")
+		;;
+        *)#Usado para fechar tudo, que não existe mais blocos de opções
+esac #Usado para fechar o case
 
 # ==================================================================
 
@@ -44,12 +37,20 @@ done
 	-e "/caminho"	Verificando a existencia de um diretorio ou arquivo
     -d "$caminho"   Verifica se o caminho é um diretório válido.
 	read	Permite uma interação para receber uma informação do usuário e armazenar na variavel. Ex.: read nome_diretorio
+
+
 # ==================================================================
 
 # exemplos de código
-#Comecamos indicando o interpretador
-#!/bin/bash
 
+#Comecamos indicando o interpretador
+	#!/bin/bash
+
+#Para conseguir algum bash script
+	chmod +x backup.sh
+	bash backup.sh
+
+======= Exemplo 1 =========
 #Solicitamos ao usuário o caminho do diretório
 read -p "Digite o caminho do diretório: " caminho
 
@@ -59,6 +60,37 @@ if [-d "$caminho"]; then
 else
   echo "O caminho não é um diretório válido ou ele não existe."
 fi
+
+======= Exemplo 2 =========
+
+read -p "Entre com a operação desejada: 'compactar' ou 'descompactar'" operacao
+
+case "$operacao" in
+        "compactar")
+                read -p "Nome do arquivo final (.tar.gz)" arquivo_saida
+                read -p "Lista de arquivos separados por espaço:" arquivos
+                tar -czf "$arquivo_saida" $arquivos
+                echo "Compactados com sucesso em $arquivo_saida"
+        ;;
+        "descompactar")
+                read -p "Nome do arquivo a descompactar (.tar.gz)" arquivo
+                read -p "Diretorio de destino" diretorio
+                tar -xzf "$arquivo" -C "$diretorio"
+                echo "Descompactado com sucesso em $diretorio"
+        ;;
+        *)
+        echo "Operacao invalida!"
+        echo "Selecione descompactar ou compactar"
+        exit 1
+esac
+
+======= Exemplo 3 =========
+
+diretorio_backup="/home/galdper/devops"
+nome_arquivo="backup_$(date +%Y%m%d_%H%M%S).tar.gz"
+tar -czf "$nome_arquivo" "diretorio_backup"
+echo "Backup concluido em $nome_arquivo"
+
 
 # ===================================================================
 
