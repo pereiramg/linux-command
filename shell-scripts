@@ -25,6 +25,12 @@ else
 	# bloco
 fi
 
+==== for ===
+for i in {1..5}
+do
+  echo $i
+done
+
 # ==================================================================
 
 # Operadores
@@ -37,6 +43,7 @@ fi
 	-ge		maior ou igual
 	-e "/caminho"	Verificando a existencia de um diretorio ou arquivo
     -d "$caminho"   Verifica se o caminho é um diretório válido.
+	read	Permite uma interação para receber uma informação do usuário e armazenar na variavel. Ex.: read nome_diretorio
 # ==================================================================
 
 # exemplos de código
