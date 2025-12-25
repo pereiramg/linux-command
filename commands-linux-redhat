@@ -14,6 +14,7 @@ mv - Mover aquivo ou pasta
 mkdir -- Criação de diretorios
   -p -- Cria toda a cadeia de diretorios ex.: /devops/app/src
 nano -- Editor padrão de arquivos
+passwd -- Definição de senha
 pwd -- Diretorio atual
 rm -- Deletar
   -d -- Deletar pastas vazias
@@ -30,7 +31,8 @@ tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único
   -j -- Comprime o arquivo usando bzip2 (maior compressão, mas mais lento).
   -C -- Especifica um diretório de destino para a extração. 
 touch -- Cria arquivos vazios. Ex.: touch data1 data2
-
+useradd -- Cria um usuário local
+  -m -- Cria o diretorio home do usuário
 
 
 
