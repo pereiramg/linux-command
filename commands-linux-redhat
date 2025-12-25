@@ -1,6 +1,8 @@
 
 
 cat --  exibe o conteúdo de um arquivo no terminal
+convert -- Esse comando nos permite converter, editar e exibir imagens em diversos formatos (pacote imagemagick). EX: convert imagem.jpg imagem.png
+  -resize -- Redimensionar a imagem. Ex.: convert imagem.jpg -resize 800x600 imagem_redimensionada.jpg
 cp -- Copia um arquivo ou diretorio
   -r -- Recursivo. Ex.: cp -r dir1/* dir2
 echo -- Exibe a string especificada
