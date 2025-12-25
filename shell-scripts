@@ -39,9 +39,7 @@ esac #Usado para fechar o case
 	read	Permite uma interação para receber uma informação do usuário e armazenar na variavel. Ex.: read nome_diretorio
 
 
-# ==================================================================
-
-# exemplos de código
+# ============================ Exemplos de código ======================================
 
 #Comecamos indicando o interpretador
 	#!/bin/bash
@@ -50,7 +48,9 @@ esac #Usado para fechar o case
 	chmod +x backup.sh
 	bash backup.sh
 
+
 ======= Exemplo 1 =========
+
 #Solicitamos ao usuário o caminho do diretório
 read -p "Digite o caminho do diretório: " caminho
 
