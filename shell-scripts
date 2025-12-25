@@ -135,5 +135,14 @@ if [ $espaco -gt $limite ]; then
 else
   echo "Espaço em disco está abaixo do limite."
 fi
+
+======= Exemplo 7 =========
+
+#!/bin/bash
+origem="/caminho/do/diretorio"
+destino="/caminho/do/backup"
+data=$(date +"%Y%m%d")
+tar -czf $destino/backup_$data.tar.gz $origem
+
 # ===================================================================
 
