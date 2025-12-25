@@ -21,7 +21,8 @@ case "$operacao" in
 		;; #Usado para fechar esse bloco
         "descompactar")
 		;;
-        *)#Usado para fechar tudo, que não existe mais blocos de opções
+        *) #É usada para capturar todos os outros casos que não foram previamente especificados
+		;;
 esac #Usado para fechar o case
 
 # ==================================================================
@@ -37,7 +38,7 @@ esac #Usado para fechar o case
 	-e "/caminho"	Verificando a existencia de um diretorio ou arquivo
     -d "$caminho"   Verifica se o caminho é um diretório válido.
 	read	Permite uma interação para receber uma informação do usuário e armazenar na variavel. Ex.: read nome_diretorio
-
+	exit 1	Saida de erro padrão
 
 # ============================ Exemplos de código ======================================
 
@@ -79,9 +80,10 @@ case "$operacao" in
                 echo "Descompactado com sucesso em $diretorio"
         ;;
         *)
-        echo "Operacao invalida!"
-        echo "Selecione descompactar ou compactar"
-        exit 1
+	        echo "Operacao invalida!"
+	        echo "Selecione descompactar ou compactar"
+	        exit 1
+		;;
 esac
 
 ======= Exemplo 3 =========
