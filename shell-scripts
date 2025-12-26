@@ -39,6 +39,16 @@ esac #Usado para fechar o case
     -d "$caminho"   Verifica se o caminho é um diretório válido.
 	read	Permite uma interação para receber uma informação do usuário e armazenar na variavel. Ex.: read nome_diretorio
 	exit 1	Saida de erro padrão
+	%		Remove o menor sufixo compatível. Ex: arquivo="relatorio.txt" | echo ${arquivo%.txt} | relatorio
+	%%		Remove o maior trecho possível do final da string. Ex.: nome="backup.mysql.2024.sql" | echo ${nome%%.*} | backup
+	&&		Executa apenas se o comando anterior tiver sucesso (exit code 0)
+	||		Executa apenas se o comando anterior falhar
+	shopt	serve para ativar ou desativar comportamentos do Bash, especialmente relacionados a globbing (expansão de curingas como *, ?, []).
+			shopt -s opcao   # ativa
+			shopt -u opcao   # desativa
+			shopt -s nocaseglob -- Torna o globbing case-insensitive (ignora maiúsculas/minúsculas).
+			shopt -s nullglob -- Quando nenhum arquivo corresponde ao glob, ele se expande para nada (string vazia), em vez de retornar o padrão literal.
+								O loop não executa se não houver arquivos correspondentes.
 
 # ============================ Exemplos de código ======================================
 
