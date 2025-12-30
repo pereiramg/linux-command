@@ -27,6 +27,9 @@ echo    Exibe a string especificada
 grep -- Usado para buscar e filtrar
   -i -- Ignora a diferença entre maiusculas e minusculas
   -v -- Inverte a busca, exibindo as linhas que não correspondem ao padrão. Ex: ps aux | grep -v grep | grep nginx
+head --> Para exibir as primeiras linhas de um arquivo de texto ou de uma saída de um comando
+  -n --> quantidade de linhas a ser exibido. Ex.: head -n 5 arquivo.txt
+  -c --> quantidade de bytes a ser exibido. Ex.: head -c 20 arquivo.txt
 ls -- Lista conteudo de um diretorio
   -l -- formato lista longa
   -a -- listar tudo
@@ -45,6 +48,8 @@ ps -- Exibir informações sobre os processos em execução no sistema
   -l -- Exibe informações detalhadas em formato longo
   -o -- Permite personalizar os campos exibidos na saída. EX.: ps -o pid,user,%cpu,%mem,cmd
   --sort -- Ordena a saída com base em um campo especifico, como uso de CPU ou memória. Ex.: ps aux --sort=-%cpu
+    --sort=-%mem --> Ordem decrescente (-)
+    --sort=%mem --> Ordem crescente
 pwd -- Diretorio atual
 rm -- Deletar
   -d -- Deletar pastas vazias
@@ -57,6 +62,8 @@ sed --> É um editor de texto não interativo, usado para transformar texto em f
   `` (vazio) --> substitui por nada. Aqui é o terceiro, substituição que está vazio
   g --> entra em opções, onde substitui todas as ocorrerncias
   i --> entra em opções, onde vai ignorar maiúsculas/minúsculas
+tail --> Exibe as ultimas linhas de um arquivo
+  -n --> Quantidade de linhas para exibir. Ex.: tail -n 10 /var/log/syslog | grep "error"
 tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único arquivo Ex.: tar -czf "$arquivo_backup" "$diretorio_backup"
   -c -- Criar
   -x -- Extrair
