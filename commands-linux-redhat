@@ -1,4 +1,8 @@
 
+> /dev/null -- Local de descarte de saidas corretas
+&> /dev/null -- Local de descarte de saidas validas e quanto erros
+
+
 awk --> Trabalha linha a linha e divide cada linha em campos (colunas)
   $0 --> linha inteira
   $1 --> primeira coluna
@@ -29,6 +33,7 @@ mkdir -- Criação de diretorios
   -p -- Cria toda a cadeia de diretorios ex.: /devops/app/src
 nano -- Editor padrão de arquivos
 passwd -- Definição de senha
+pgrep -- semelhante ao ps | grep, mas retorna apenas os IDs dos processos
 ps -- Exibir informações sobre os processos em execução no sistema
   -e ou -A -- Lista todos os processos em execução no sistema
   -f -- Saida detalhada
