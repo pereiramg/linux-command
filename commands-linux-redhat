@@ -1,7 +1,7 @@
 
 > /dev/null -- Local de descarte de saidas corretas
 &> /dev/null -- Local de descarte de saidas validas e quanto erros
-
+<<< --> redireciona o conteudo da variavel
 
 awk --> Trabalha linha a linha e divide cada linha em campos (colunas)
   $0 --> linha inteira
@@ -11,11 +11,14 @@ awk --> Trabalha linha a linha e divide cada linha em campos (colunas)
   NF --> Número de campos
   FS --> Separador de campo
   OFS --> Separador de saída
+  {print $3} --> Imprime o terceiro campo da linha (separados por espaços)
 cat --> Exibe o conteúdo de um arquivo no terminal
 convert --> Esse comando nos permite converter, editar e exibir imagens em diversos formatos (pacote imagemagick). EX: convert imagem.jpg imagem.png
   -resize --> Redimensionar a imagem. Ex.: convert imagem.jpg -resize 800x600 imagem_redimensionada.jpg
 cp --> Copia um arquivo ou diretorio
   -r --> Recursivo. Ex.: cp -r dir1/* dir2
+curl -- Usado para fazer requisição http
+  -s -- modo silencioso, suprime mensagens de progressos ou erros
 df --> Disk Free, onde lista meus filesystems
   -h --> Formato legível (K, M, G)
   -T --> Mostrar tipo de filesystem
