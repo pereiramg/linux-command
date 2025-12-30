@@ -17,6 +17,9 @@ df --> Disk Free, onde lista meus filesystems
   -T --> Mostrar tipo de filesystem
 du --> Espaço ocupado por arquivos/diretórios
 echo    Exibe a string especificada
+grep -- Usado para buscar e filtrar
+  -i -- Ignora a diferença entre maiusculas e minusculas
+  -v -- Inverte a busca, exibindo as linhas que não correspondem ao padrão. Ex: ps aux | grep -v grep | grep nginx
 ls -- Lista conteudo de um diretorio
   -l -- formato lista longa
   -a -- listar tudo
@@ -26,6 +29,14 @@ mkdir -- Criação de diretorios
   -p -- Cria toda a cadeia de diretorios ex.: /devops/app/src
 nano -- Editor padrão de arquivos
 passwd -- Definição de senha
+ps -- Exibir informações sobre os processos em execução no sistema
+  -e ou -A -- Lista todos os processos em execução no sistema
+  -f -- Saida detalhada
+  -u root -- Exibe os processos pertecentes a um usuário especifico
+  aux -- Mostra todos os processos em execução no sistema
+  -l -- Exibe informações detalhadas em formato longo
+  -o -- Permite personalizar os campos exibidos na saída. EX.: ps -o pid,user,%cpu,%mem,cmd
+  --sort -- Ordena a saída com base em um campo especifico, como uso de CPU ou memória. Ex.: ps aux --sort=-%cpu
 pwd -- Diretorio atual
 rm -- Deletar
   -d -- Deletar pastas vazias
