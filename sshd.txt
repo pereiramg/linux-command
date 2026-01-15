@@ -3,6 +3,10 @@ o serviço sshd falhou ao iniciar — o código 255 quase sempre indica erro de 
 ====== local de configuração ======
   /etc/ssh/sshd_config
 
+Port 22
+PermitRootLogin yes
+PasswordAuthentication yes
+
 ====== Testar se conecta ======
   ssh localhost
 
