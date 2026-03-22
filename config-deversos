@@ -1,0 +1,6 @@
+
+====== permissão sudo =====
+/etc/sudoers.d/suders-[user]
+	meu-user	ALL=(ALL)	NOPASSWD: ALL
+
+=======
