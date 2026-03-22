@@ -27,6 +27,8 @@ echo    Exibe a string especificada
 grep -- Usado para buscar e filtrar
   -i -- Ignora a diferença entre maiusculas e minusculas
   -v -- Inverte a busca, exibindo as linhas que não correspondem ao padrão. Ex: ps aux | grep -v grep | grep nginx
+  -A3 -- Mostra 3 linhas DEPOIS da linha encontrada.
+  -B3 -- Mostra 3 linhas ANTES da linha encontrada.
 head --> Para exibir as primeiras linhas de um arquivo de texto ou de uma saída de um comando
   -n --> quantidade de linhas a ser exibido. Ex.: head -n 5 arquivo.txt
   -c --> quantidade de bytes a ser exibido. Ex.: head -c 20 arquivo.txt
