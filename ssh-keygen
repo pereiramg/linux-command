@@ -1,0 +1,16 @@
+
+Gerar um conjuntos de chaves simetricas (publica e privada)
+	ssh-keygen -b 2048 -t rsa -f [nome-da-chave]
+
+depois copiar a chave publica para os demais servidores que vamos acessar
+
+Para realizar a copia de chaves para outros servidores
+	ssh-copy-id -i [a chave que vou compartilhar] [user]@[servidor]
+
+Conectando no servidor passando a chave
+  ssh -i [chave-privada] user@servidor
+
+Para não passar a chave, acessar o arquivo abaixo
+	/home/[user]/.ssh/config
+	Dentro do arquivo apenas colocar a chave conforme abaixo
+		IdentityFile "caminho-da-chave-privada"
