@@ -66,6 +66,11 @@ sed --> É um editor de texto não interativo, usado para transformar texto em f
   `` (vazio) --> substitui por nada. Aqui é o terceiro, substituição que está vazio
   g --> entra em opções, onde substitui todas as ocorrerncias
   i --> entra em opções, onde vai ignorar maiúsculas/minúsculas
+ss --> (socket statistics) é uma ferramenta moderna para ver conexões de rede (substitui o antigo netstat)
+  -n --> Mostra IPs e portas em formato numérico (numeric)
+  -a --> Mostra todas as conexões (all)
+  -o --> Mostra informações de temporizadores TCP (timer)
+  -t --> Filtra apenas conexões TCP
 tail --> Exibe as ultimas linhas de um arquivo
   -n --> Quantidade de linhas para exibir. Ex.: tail -n 10 /var/log/syslog | grep "error"
 tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único arquivo Ex.: tar -czf "$arquivo_backup" "$diretorio_backup"
@@ -80,6 +85,7 @@ tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único
 touch -- Cria arquivos vazios. Ex.: touch data1 data2
 useradd -- Cria um usuário local
   -m -- Cria o diretorio home do usuário
-
-
+watch -- Executa outro comando repetidamente, mostrando o resultado na tela
+  watch -n 1 ss -naot --> Atualizar mais rápido
+  watch -d ss -naot --> Destacar mudanças
 
