@@ -32,6 +32,10 @@ grep -- Usado para buscar e filtrar
 head --> Para exibir as primeiras linhas de um arquivo de texto ou de uma saída de um comando
   -n --> quantidade de linhas a ser exibido. Ex.: head -n 5 arquivo.txt
   -c --> quantidade de bytes a ser exibido. Ex.: head -c 20 arquivo.txt
+iftop --> monitorar o tráfego de rede em tempo real
+  -i eth0 --> interface para monitoramento
+  -P --> Mostrar porta
+  -N --> Mostrar IP e hostname
 localectl status -- Para verificar como está a config atual
   localectl set-keymap br-abnt2 -- alterar para o abnt2
 ls -- Lista conteudo de um diretorio
