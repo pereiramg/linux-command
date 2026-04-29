@@ -8,3 +8,11 @@ sudo dnf install epel-release --> O EPEL (Extra Packages for Enterprise Linux) �
     nodejs (dependendo do repo)
 
 sudo dnf install iftop --> monitorar o tráfego de rede em tempo real
+
+sudo dnf install sysstat -y --> é um pacote com várias ferramentas importantes:
+  sar → mostra uso de CPU, memória, disco, rede (inclusive histórico)
+  iostat → estatísticas de I/O de disco
+  mpstat → uso de CPU por núcleo
+  pidstat → uso por processo
+  sadf → exporta dados (CSV, JSON, etc.)
+
