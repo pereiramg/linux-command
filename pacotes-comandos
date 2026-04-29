@@ -1,0 +1,10 @@
+sudo dnf install epel-release --> O EPEL (Extra Packages for Enterprise Linux) é um repositório mantido pela Fedora Project, com pacotes adicionais que não vêm por padrão no Red Hat Enterprise Linux.
+  Depois de ativar, você pode instalar coisas como:
+    htop
+    iftop
+    nginx (em algumas versões)
+    fail2ban
+    ansible (em versões mais antigas)
+    nodejs (dependendo do repo)
+
+sudo dnf install iftop --> monitorar o tráfego de rede em tempo real
