@@ -22,6 +22,13 @@ curl -- Usado para fazer requisição http
 df --> Disk Free, onde lista meus filesystems
   -h --> Formato legível (K, M, G)
   -T --> Mostrar tipo de filesystem
+dmesg --> Usado para visualizar as mensagens do kernel Linux, principalmente aquelas geradas durante o boot e eventos de hardware.
+  dmesg -T --> Ver com timestamp legível
+  dmesg | grep -i error --> Filtrar erros
+  dmesg | tail --> Ver mensagens recentes
+  dmesg -w --> Acompanhar em tempo real
+  dmesg | grep -i sda --> Problema de disco
+  dmesg | grep -i eth --> Problema de rede
 du --> Espaço ocupado por arquivos/diretórios
 echo    Exibe a string especificada
 grep -- Usado para buscar e filtrar
@@ -46,12 +53,21 @@ ip --> Com ele você consegue: Ver e configurar interfaces de rede / Gerenciar e
   ip route --> Ver rotas (gateway)
   ip route add default via 192.168.1.1 --> Adicionar rota padrão
   ip neigh --> Ver tabela de vizinhos (ARP)
+journalctl --> ferramenta usada em sistemas Linux com systemd para visualizar e consultar logs do sistema de forma centralizada.
+  journalctl -n 50 --> Ver logs recentes
+  journalctl -f --> Acompanhar em tempo real (tipo tail -f)
+  journalctl -u sshd --> Logs de um serviço específico
+  journalctl -b --> Logs do boot atual
+  journalctl -k --> Logs do kernel
+  journalctl --since "2026-04-29 14:00" / journalctl --since yesterday --> Filtrar por data
+  journalctl -p err --> Filtrar por erro
 localectl status -- Para verificar como está a config atual
   localectl set-keymap br-abnt2 -- alterar para o abnt2
 ls -- Lista conteudo de um diretorio
   -l -- formato lista longa
   -a -- listar tudo
   -t -- Ordenar a lista em ordem cronologica - time
+lsmod --> serve para listar os módulos do kernel Linux que estão carregados no momento.
 lsof --> Arquivos abertos por processos / Portas de rede em uso / Qual processo está usando um recurso / Arquivos deletados ainda em uso
           Dispositivos (discos, sockets, pipes)
   lsof -i :80 --> Ver quem está usando uma porta
