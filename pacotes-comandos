@@ -16,3 +16,8 @@ sudo dnf install sysstat -y --> é um pacote com várias ferramentas importantes
   pidstat → uso por processo
   sadf → exporta dados (CSV, JSON, etc.)
 
+sudo dnf install mtr --> Ferramenta de rede que combina o ping + traceroute em tempo real.
+
+sudo dnf install lsof --> Ferramenta para descobrir quem está usando o quê no sistema — seja arquivo, porta ou recurso.
+
+
