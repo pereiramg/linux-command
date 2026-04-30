@@ -36,15 +36,44 @@ iftop --> monitorar o tráfego de rede em tempo real
   -i eth0 --> interface para monitoramento
   -P --> Mostrar porta
   -N --> Mostrar IP e hostname
+ip --> Com ele você consegue: Ver e configurar interfaces de rede / Gerenciar endereços IP / Manipular rotas (gateway) / Ver conexões e regras de rede
+        Trabalhar com VLANs, bridges e túneis
+  ip addr / ip a --> Ver interfaces e IPs
+  ip link --> Ver status das interfaces
+  ip link set eth0 up / ip link set eth0 down --> Subir ou derrubar interface
+  ip addr add 192.168.1.10/24 dev eth0 --> Adicionar IP manualmente
+  ip addr del 192.168.1.10/24 dev eth0 --> Remover IP
+  ip route --> Ver rotas (gateway)
+  ip route add default via 192.168.1.1 --> Adicionar rota padrão
+  ip neigh --> Ver tabela de vizinhos (ARP)
 localectl status -- Para verificar como está a config atual
   localectl set-keymap br-abnt2 -- alterar para o abnt2
 ls -- Lista conteudo de um diretorio
   -l -- formato lista longa
   -a -- listar tudo
   -t -- Ordenar a lista em ordem cronologica - time
+lsof --> Arquivos abertos por processos / Portas de rede em uso / Qual processo está usando um recurso / Arquivos deletados ainda em uso
+          Dispositivos (discos, sockets, pipes)
+  lsof -i :80 --> Ver quem está usando uma porta
+  lsof -iTCP -sTCP:ESTABLISHED --> Para listar conexões TCP já estabelecidas (ativas) no sistema
+  lsof -p 1234 --> Ver arquivos de um processo
+  lsof /var/log/messages --> Ver qual processo está usando um arquivo
+  lsof -u galdper --> Ver arquivos abertos por um usuário
+  lsof | grep deleted --> Ver arquivos deletados ainda em uso
 mv - Mover aquivo ou pasta
 mkdir -- Criação de diretorios
   -p -- Cria toda a cadeia de diretorios ex.: /devops/app/src
+mt --> é uma ferramenta de rede que combina o ping + traceroute em tempo real.
+  mtr -r google.com --> Rodar modo texto (sem interface interativa)
+  mtr google.com --> Abre um interface interativa
+    Colunas comuns:
+      HOST → cada salto (roteador no caminho)
+      Loss% → perda de pacotes
+      Snt → pacotes enviados
+      Last / Avg / Best / Wrst → latência
+  mtr -c 10 google.com --> Definir número de ciclos
+  mtr -T google.com --> Usar TCP (útil quando ICMP é bloqueado)
+  mtr -P 443 google.com --> Mostrar portas
 nano -- Editor padrão de arquivos
 passwd -- Definição de senha
 pgrep -- semelhante ao ps | grep, mas retorna apenas os IDs dos processos
@@ -64,6 +93,17 @@ rm -- Deletar
   -f -- Force
   -r / -R -- modo recursivo
 rmdir -- Remover um diretorio vazio
+sar --> Ele permite ver histórico e tempo real de: CPU / Memória / Disco (I/O) / Rede / Swap / Load average
+  sudo systemctl enable --now sysstat -- > para funcionar o serviço precisa estar ativo
+  sar -u 1 5 --> Mostra uso da CPU a cada 1 segundo, 5 vezes.
+    %user → uso por aplicações
+    %system → kernel
+    %idle → ocioso
+    %iowait → esperando disco (⚠️ importante em problemas)
+  sar -r 1 5 --> Memória
+  sar -d 1 5 --> Disco (I/O)
+  sar -n DEV 1 5 --> Rede
+  sar -u -f /var/log/sa/sa28 --> ver dados de ontem
 sed --> É um editor de texto não interativo, usado para transformar texto em fluxo: (s / padrão / substituição / opções). Exemplo: sed 's/%//'
   s --> substitute (substituir)
   % --> padrão a ser encontrado. Aqui é um exemplo que é o % para ser encontrado
@@ -75,6 +115,7 @@ ss --> (socket statistics) é uma ferramenta moderna para ver conexões de rede 
   -a --> Mostra todas as conexões (all)
   -o --> Mostra informações de temporizadores TCP (timer)
   -t --> Filtra apenas conexões TCP
+  -p --> Exibe o processo que esta na porta
 tail --> Exibe as ultimas linhas de um arquivo
   -n --> Quantidade de linhas para exibir. Ex.: tail -n 10 /var/log/syslog | grep "error"
 tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único arquivo Ex.: tar -czf "$arquivo_backup" "$diretorio_backup"
