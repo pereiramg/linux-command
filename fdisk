@@ -1,0 +1,37 @@
+======== 1. Ver discos disponíveis ========
+  lsblk
+
+======== 2. Abrir o disco no fdisk ========
+  sudo fdisk /dev/sdb
+
+======== 3. Principais comandos dentro do fdisk ========
+  Digite m para ajuda:
+  Tecla	Função
+    n	criar nova partição
+    d	deletar partição
+    p	listar partições
+    t	alterar tipo
+    w	salvar alterações
+    q	sair sem salvar
+
+======== 4. Criar uma partição (exemplo) ========
+Dentro do fdisk:
+  n        # nova partição
+  p        # primária
+  1        # número
+  ENTER    # início padrão
+  ENTER    # usar todo o espaço
+  w        # salvar
+
+======== 5. Após criar partição ========
+  lsblk
+
+======== 6. Criar filesystem ========
+  mkfs.xfs /dev/sdb1
+
+======== 7. Montar ========
+  mount /dev/sdb1 /data
+
+======== Ver partições (sem entrar no modo interativo) ========
+  fdisk -l
+
