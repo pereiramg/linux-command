@@ -1,3 +1,4 @@
+==============
 sudo dnf install epel-release --> O EPEL (Extra Packages for Enterprise Linux) é um repositório mantido pela Fedora Project, com pacotes adicionais que não vêm por padrão no Red Hat Enterprise Linux.
   Depois de ativar, você pode instalar coisas como:
     htop
@@ -7,17 +8,21 @@ sudo dnf install epel-release --> O EPEL (Extra Packages for Enterprise Linux) �
     ansible (em versões mais antigas)
     nodejs (dependendo do repo)
 
+================
 sudo dnf install iftop --> monitorar o tráfego de rede em tempo real
-
+================
 sudo dnf install sysstat -y --> é um pacote com várias ferramentas importantes:
   sar → mostra uso de CPU, memória, disco, rede (inclusive histórico)
   iostat → estatísticas de I/O de disco
   mpstat → uso de CPU por núcleo
   pidstat → uso por processo
   sadf → exporta dados (CSV, JSON, etc.)
-
+=================
 sudo dnf install mtr --> Ferramenta de rede que combina o ping + traceroute em tempo real.
-
+=================
 sudo dnf install lsof --> Ferramenta para descobrir quem está usando o quê no sistema — seja arquivo, porta ou recurso.
+=================
+sudo dnf install btrfs-progs --> É o conjunto de ferramentas de espaço de usuário para trabalhar com o filesystem Btrfs no Linux.
+=================
 
 
