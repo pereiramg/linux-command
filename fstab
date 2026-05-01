@@ -1,0 +1,50 @@
+/etc/fstab
+
+Estrutura do arquivo
+  <dispositivo> <ponto_de_montagem> <tipo> <opções> <dump> <fsck>
+
+======== Dispositivo ========
+Pode ser:
+  /dev/sda1
+  UUID=xxxx
+  LABEL=nome
+👉 Melhor prática: usar UUID (obtido com blkid)
+
+======== Ponto de montagem ========
+Onde será montado:
+  /       → raiz
+  /boot   → boot
+  /data   → dados
+
+======== Tipo de filesystem ========
+Exemplos:
+  xfs
+  ext4
+  swap
+  nfs
+
+======== Opções (muito importante) ========
+As mais comuns:
+  defaults → padrão (rw, suid, exec, auto, etc.)
+  ro → somente leitura
+  rw → leitura e escrita
+  noexec → não executa binários
+  nosuid → ignora SUID
+  noatime → melhora performance (não atualiza access time)
+  _netdev → necessário para discos de rede
+
+======== Dump ========
+Quase sempre:
+  0
+👉 usado por backup antigo (dump)
+
+======== Fsck (checagem) ========
+  0 → não checar
+  1 → checar primeiro (geralmente /)
+  2 → checar depois
+
+======== Exemplo real ========
+UUID=abcd-1234   /       xfs   defaults        0 1
+UUID=efgh-5678   /data   ext4  defaults        0 2
+UUID=swap-9999   swap    swap  defaults        0 0
+
