@@ -1,0 +1,125 @@
+Se você quer:
+  simples → ext4
+  estabilidade enterprise (RHEL) → XFS
+  snapshot rápido → Btrfs
+  
+====================== Btrfs =======================
+
+  mkfs.btrfs → criar filesystem Btrfs
+  btrfs → ferramenta principal (gerenciamento geral)
+  btrfs subvolume → gerenciar subvolumes
+  btrfs filesystem → info e stats
+  btrfs balance → rebalancear dados
+  btrfs scrub → verificar integridade
+  btrfs check → checar/recuperar filesystem
+==============
+O que o Btrfs oferece (diferencial)
+O Btrfs é um filesystem moderno com recursos avançados:
+  📸 Snapshots (instantâneos)
+  🔄 Copy-on-write (CoW)
+  📦 Subvolumes
+  🧬 Integridade de dados (checksums)
+  🔁 RAID nativo
+  📈 Compressão
+
+=============
+mkfs.btrfs /dev/sdb1 --> Criar filesystem
+mount /dev/sdb1 /mnt --> Montar
+btrfs subvolume snapshot /mnt /mnt/snapshot1 --> Criar snapshot
+
+=============
+🎯Para que usar na prática?
+💾 Ambientes que precisam de snapshot rápido
+☁️ Infraestrutura moderna (cloud, containers)
+📊 Backup eficiente
+🧯 Recuperação de dados
+
+==============
+⚠️ Observações importantes
+Nem todas as distros usam Btrfs por padrão (ex: RHEL usa mais XFS)
+Algumas features avançadas exigem cuidado
+Pode ser mais complexo que ext4/xfs
+
+
+================================== XFS ==============================
+🧠 O que é o XFS?
+👉 É um filesystem projetado para:
+  📈 Alta performance
+  💾 Grandes volumes de dados
+  ⚡ Operações paralelas
+Muito comum em servidores, bancos de dados e ambientes de produção.
+
+=================
+⚙️ Principais características
+  📊 Journaling → recuperação rápida após falhas
+  📦 Suporte a arquivos muito grandes
+  🧠 Escalabilidade (terabytes/petabytes)
+  ⚡ Excelente desempenho em escrita
+  🔄 Alocação eficiente de espaço
+==================
+
+mkfs.xfs /dev/sdb1 --> Criar filesystem
+mount /dev/sdb1 /data --> Montar
+xfs_info /data --> Ver informações
+xfs_repair /dev/sdb1 --> Reparar filesystem
+==================
+🎯 Para que usar na prática?
+  💾 Servidores de arquivos
+  📊 Banco de dados
+  ☁️ Ambientes cloud
+  📦 Storage pesado
+==================
+⚠️ Limitação importante
+  ❗ Não permite diminuir (shrink) o filesystem
+👉 Só pode:
+  aumentar (grow) ✅
+  diminuir ❌
+==================
+Expandir filesystem (muito usado)
+  xfs_growfs /data
+👉 Usado após aumentar disco/LVM
+===================
+⚙️ Integração com LVM
+Muito comum:
+  Disco → LVM → XFS → /data
+====================
+⚠️ Boas práticas
+  Use UUID no fstab
+  Faça backup antes de xfs_repair
+  Nunca rode repair com filesystem montado
+
+================================== EXT4 ===============================
+🧠 O que é o ext4?
+👉 É um filesystem equilibrado entre simplicidade, estabilidade e desempenho.
+Muito usado em servidores, desktops e ambientes onde confiabilidade é prioridade.
+====================
+⚙️ Principais características
+  📊 Journaling → evita corrupção após falhas
+  💾 Suporte a arquivos grandes (até vários TB)
+  📦 Baixo consumo de recursos
+  ⚡ Boa performance geral
+  🔄 Suporte a shrink (diminuir filesystem)
+====================
+
+mkfs.ext4 /dev/sdb1 --> Criar filesystem
+mount /dev/sdb1 /data --> Montar
+tune2fs -l /dev/sdb1 --> Ver informações
+fsck.ext4 /dev/sdb1 --> Verificar e reparar
+====================
+🎯 Para que usar na prática?
+  💻 Sistemas simples e estáveis
+  🖥️ Servidores pequenos/médios
+  📦 Partições de sistema (/, /home)
+  🧯 Ambientes onde confiabilidade > performance extrema
+=======================
+🔄 Diferencial importante
+👉 Ao contrário do XFS:
+✔️ ext4 permite:
+  aumentar (grow)
+  diminuir (shrink)
+Isso dá mais flexibilidade.
+========================
+⚠️ Limitações
+  ❌ Não tem snapshot nativo
+  ❌ Menos eficiente que XFS em cargas muito grandes
+  ❌ Menos recursos que Btrfs
