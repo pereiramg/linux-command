@@ -1,0 +1,44 @@
+========================================================
+
+/lib/systemd/system --> Esse caminho contém definições de serviços e componentes do systemd, como:
+    🟢 .service → serviços (ex: sshd, nginx)
+    🔵 .socket → sockets
+    🟡 .target → grupos de serviços (níveis de execução)
+    🟣 .timer → agendamentos (tipo cron)
+    ⚙️ .mount, .automount, .swap
+=========================================================
+Hierarquia importante (muito cobrado em troubleshooting)
+  Caminho	                Função
+  /etc/systemd/system	    customizações / overrides
+  /run/systemd/system	    runtime (temporário)
+  /lib/systemd/system	    padrão do sistema
+
+Prioridade: /etc > /run > /lib
+=========================================================
+ls /lib/systemd/system/sshd.service --> Ver um serviço
+
+========= Para editar um serviço =========
+Editar corretamente (não direto no /lib):
+  systemctl edit sshd
+👉 Isso cria override em:
+  /etc/systemd/system/sshd.service.d/
+
+=========================================================
+GRUB
+/boot/grub --> É o diretório onde ficam arquivos de configuração e suporte do GRUB. Ele é usado antes do sistema operacional carregar totalmente.
+
+BIOS: /boot/grub2/grub.cfg
+UEFI /boot/efi/EFI/redhat/grub.cfg
+
+Como alterar corretamente - Arquivos de configuração ficam em:
+  /etc/default/grub
+
+grub2-mkconfig -o /boot/grub/grub.cfg --> Depois de editar gerar novamente
+
+=========================================================
+
+
+
+
+
+
