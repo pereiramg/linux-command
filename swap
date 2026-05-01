@@ -1,0 +1,11 @@
+Criando swap (exemplo rápido)
+
+fallocate -l 2G /swapfile --> Criar arquivo
+
+chmod 600 /swapfile --> Ajustar permissão
+
+mkswap /swapfile --> Formatar como swap
+
+swapon /swapfile --> Ativar
+
+/swapfile swap swap defaults 0 0 --> Persistir no boot - Adicionar no /etc/fstab
