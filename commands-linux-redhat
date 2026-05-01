@@ -53,6 +53,9 @@ du --> Espaço ocupado por arquivos/diretórios
 
 echo --> Exibe a string especificada
 
+free --> usado para ver o uso de memória RAM e swap no sistema Linux
+  free -h --> Forma mais usada (legível)
+
 grep --> Usado para buscar e filtrar
   -i -- Ignora a diferença entre maiusculas e minusculas
   -v -- Inverte a busca, exibindo as linhas que não correspondem ao padrão. Ex: ps aux | grep -v grep | grep nginx
@@ -125,6 +128,14 @@ mv - Mover aquivo ou pasta
 mkdir -- Criação de diretorios
   -p -- Cria toda a cadeia de diretorios ex.: /devops/app/src
 
+mount --> usado no Linux para montar sistemas de arquivos, ou seja, tornar um disco, partição ou recurso acessível dentro do sistema
+  mount OU mount | grep /dev --> Ver montagens atuais
+  mount -t xfs /dev/sdb1 /data --> Montar com tipo de filesystem
+  mount -a --> Montar usando fstab
+  mount -o ro /dev/sdb1 /data --> Montar somente leitura
+  mount -t nfs 192.168.1.10:/export /mnt --> Montar NFS
+  umount /data | umount /dev/sdb1 --> Desmontar (unmount)
+  
 mt --> é uma ferramenta de rede que combina o ping + traceroute em tempo real.
   mtr -r google.com --> Rodar modo texto (sem interface interativa)
   mtr google.com --> Abre um interface interativa
@@ -188,6 +199,13 @@ ss --> (socket statistics) é uma ferramenta moderna para ver conexões de rede 
   -o --> Mostra informações de temporizadores TCP (timer)
   -t --> Filtra apenas conexões TCP
   -p --> Exibe o processo que esta na porta
+
+swapon --> usado para ativar a memória swap no Linux
+  swapon /dev/sda2 --> Ativar uma partição swap
+  swapon /swapfile --> Ativar um arquivo swap
+  swapon --show --> Ver swap ativo
+  swapoff /swapfile --> Desativar swap
+  swapoff -a --> Desativar todos os swap
 
 tail --> Exibe as ultimas linhas de um arquivo
   -n --> Quantidade de linhas para exibir. Ex.: tail -n 10 /var/log/syslog | grep "error"
