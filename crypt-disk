@@ -1,0 +1,101 @@
+===================== cryptsetup ======================
+🧠 O que ele faz?
+👉 Permite:
+  🔐 Criptografar partições ou discos inteiros
+  🔓 Abrir/desbloquear volumes criptografados
+  🔒 Proteger dados com senha ou chave
+  💾 Criar volumes seguros para dados sensíveis
+================
+⚙️ Como funciona (conceito)
+    Disco (/dev/sdb1)
+       ↓ criptografia (LUKS)
+    Volume criptografado
+       ↓ aberto com senha
+    /dev/mapper/secure-data
+       ↓ filesystem (xfs/ext4)
+    Montagem (/data)
+=================
+
+1. Criar volume criptografado
+  cryptsetup luksFormat /dev/sdb1
+2. Abrir o volume
+  cryptsetup open /dev/sdb1 secure-data
+Isso cria:
+  /dev/mapper/secure-data
+Criar filesystem
+  mkfs.xfs /dev/mapper/secure-data
+4. Montar
+  mount /dev/mapper/secure-data /data
+Fechar volume
+  cryptsetup close secure-data
+=======================
+Sempre faça backup do header:
+  cryptsetup luksHeaderBackup /dev/sdb1 --header-backup-file backup.img
+
+========== COM LVM =============
+🧠 🔐 Arquitetura final
+  Disco (/dev/sdb)
+     ↓
+  Partição (/dev/sdb1)
+     ↓
+  LUKS (cryptsetup)
+     ↓
+  /dev/mapper/secure_disk
+     ↓
+  LVM (PV → VG → LV)
+     ↓
+  Filesystem (XFS/ext4)
+     ↓
+  Mount (/data)
+
+=======
+1️⃣ Criar partição
+  fdisk /dev/sdb
+  n → nova partição
+  w → salvar
+Resultado:
+  /dev/sdb1
+=========
+2️⃣ Criptografar com LUKS
+  cryptsetup luksFormat /dev/sdb1
+👉 Confirme com YES e defina senha
+=========
+3️⃣ Abrir volume criptografado
+  cryptsetup open /dev/sdb1 secure_disk
+Agora existe:
+  /dev/mapper/secure_disk
+=========
+4️⃣ Criar LVM
+Criar PV
+  pvcreate /dev/mapper/secure_disk
+Criar VG
+  vgcreate vg_secure /dev/mapper/secure_disk
+Criar LV
+  lvcreate -l 100%FREE -n lv_data vg_secure
+=========
+5️⃣ Criar filesystem
+Opção 1 (mais comum em RHEL):
+  mkfs.xfs /dev/vg_secure/lv_data
+Opção 2:
+  mkfs.ext4 /dev/vg_secure/lv_data
+=========
+6️⃣ Criar ponto de montagem
+  mkdir /data
+=========
+7️⃣ Montar
+  mount /dev/vg_secure/lv_data /data
+=========
+8️⃣ Configurar montagem automática
+📌 1. Editar /etc/crypttab
+  vi /etc/crypttab
+Adicionar:
+  secure_disk UUID=XXXX none luks
+👉 Pegue UUID com:
+  blkid /dev/sdb1
+📌 2. Editar /etc/fstab
+  vi /etc/fstab
+Adicionar:
+  /dev/vg_secure/lv_data  /data  xfs  defaults  0 0
+=========
+9️⃣ Testar tudo
+  mount -a
