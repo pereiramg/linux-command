@@ -24,5 +24,6 @@ sudo dnf install lsof --> Ferramenta para descobrir quem está usando o quê no 
 =================
 sudo dnf install btrfs-progs --> É o conjunto de ferramentas de espaço de usuário para trabalhar com o filesystem Btrfs no Linux.
 =================
-
+sudo dnf install cryptsetup --> O pacote cryptsetup (em algumas distros chamado cryptsetup-bin) fornece as ferramentas para criptografia de discos no Linux, geralmente usando o padrão LUKS
+=================
 
