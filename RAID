@@ -1,0 +1,54 @@
+================== mdadm =====================
+O mdadm é a ferramenta usada no Linux para criar e gerenciar RAID por software (via subsistema md — “multiple devices”).
+
+⚙️ O que o mdadm faz?
+Com ele você consegue:
+  🆕 Criar arrays RAID (/dev/md0, /dev/md1…)
+  🔍 Monitorar status
+  🔄 Adicionar/remover discos
+  🧯 Recuperar após falhas (rebuild)
+  💾 Salvar/recuperar configuração
+================
+Exemplo prático (RAID 1)
+📌 1. Criar array
+  mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1
+📌 2. Ver status
+  cat /proc/mdstat
+📌 3. Criar filesystem
+  mkfs.xfs /dev/md0
+📌 4. Montar
+  mount /dev/md0 /data
+==============
+🔎 Comandos úteis
+Ver detalhes do RAID
+  mdadm --detail /dev/md0
+Monitorar rebuild
+  watch cat /proc/mdstat
+Adicionar disco (recovery)
+  mdadm /dev/md0 --add /dev/sdd1
+Remover disco
+  mdadm /dev/md0 --fail /dev/sdb1
+  mdadm /dev/md0 --remove /dev/sdb1
+===============
+⚙️ Configuração persistente
+Salvar configuração:
+  mdadm --detail --scan >> /etc/mdadm.conf
+===============
+🔄 Integração comum (produção)
+  Discos → RAID (mdadm) → LVM → Filesystem → /data
+👉 Muito comum em servidores físicos
+================
+💡 Dica nível DevOps
+Sempre monitore:
+  cat /proc/mdstat
+👉 Se aparecer:
+  [U_]
+➡️ Disco falhou ⚠️
+================
+🔄 Exemplo real de fluxo
+# verificar
+  mdadm --examine /dev/sdb1
+# limpar
+  mdadm --zero-superblock /dev/sdb1
+# confirmar
+  mdadm --examine /dev/sdb1
