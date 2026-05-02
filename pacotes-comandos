@@ -1,3 +1,8 @@
+
+=================
+sudo dnf install btrfs-progs --> É o conjunto de ferramentas de espaço de usuário para trabalhar com o filesystem Btrfs no Linux.
+=================
+sudo dnf install cryptsetup --> O pacote cryptsetup (em algumas distros chamado cryptsetup-bin) fornece as ferramentas para criptografia de discos no Linux, geralmente usando o padrão LUKS
 ==============
 sudo dnf install epel-release --> O EPEL (Extra Packages for Enterprise Linux) é um repositório mantido pela Fedora Project, com pacotes adicionais que não vêm por padrão no Red Hat Enterprise Linux.
   Depois de ativar, você pode instalar coisas como:
@@ -7,9 +12,14 @@ sudo dnf install epel-release --> O EPEL (Extra Packages for Enterprise Linux) �
     fail2ban
     ansible (em versões mais antigas)
     nodejs (dependendo do repo)
-
+================
+sudo dnf install hdparm --> comando usado no Linux para consultar e ajustar parâmetros de discos (HDD/SSD), além de fazer testes rápidos de performance.
 ================
 sudo dnf install iftop --> monitorar o tráfego de rede em tempo real
+================
+sudo dnf install lsof --> Ferramenta para descobrir quem está usando o quê no sistema — seja arquivo, porta ou recurso.
+=================
+sudo dnf install mtr --> Ferramenta de rede que combina o ping + traceroute em tempo real.
 ================
 sudo dnf install sysstat -y --> é um pacote com várias ferramentas importantes:
   sar → mostra uso de CPU, memória, disco, rede (inclusive histórico)
@@ -18,12 +28,6 @@ sudo dnf install sysstat -y --> é um pacote com várias ferramentas importantes
   pidstat → uso por processo
   sadf → exporta dados (CSV, JSON, etc.)
 =================
-sudo dnf install mtr --> Ferramenta de rede que combina o ping + traceroute em tempo real.
-=================
-sudo dnf install lsof --> Ferramenta para descobrir quem está usando o quê no sistema — seja arquivo, porta ou recurso.
-=================
-sudo dnf install btrfs-progs --> É o conjunto de ferramentas de espaço de usuário para trabalhar com o filesystem Btrfs no Linux.
-=================
-sudo dnf install cryptsetup --> O pacote cryptsetup (em algumas distros chamado cryptsetup-bin) fornece as ferramentas para criptografia de discos no Linux, geralmente usando o padrão LUKS
-=================
+
+
 
