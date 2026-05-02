@@ -62,6 +62,15 @@ grep --> Usado para buscar e filtrar
   -A3 -- Mostra 3 linhas DEPOIS da linha encontrada.
   -B3 -- Mostra 3 linhas ANTES da linha encontrada.
 
+hdparm --> é um comando usado no Linux para consultar e ajustar parâmetros de discos (HDD/SSD), além de fazer testes rápidos de performance.
+  hdparm -I /dev/sda --> Ver informações do disco
+  hdparm -t /dev/sda --> Teste de leitura (benchmark simples)
+  hdparm -T /dev/sda --> Teste com cache
+  hdparm -tT /dev/sda --> Teste completo
+  hdparm -W1 /dev/sda --> # ativa cache - Ajustes (cuidado ⚠️)
+  hdparm -W0 /dev/sda --> # desativa cache - Ajustes (cuidado ⚠️)
+  hdparm -S 120 /dev/sda --> Definir standby (economia de energia)
+  
 head --> Para exibir as primeiras linhas de um arquivo de texto ou de uma saída de um comando
   -n --> quantidade de linhas a ser exibido. Ex.: head -n 5 arquivo.txt
   -c --> quantidade de bytes a ser exibido. Ex.: head -c 20 arquivo.txt
@@ -104,6 +113,14 @@ lsblk --> usado para listar dispositivos de bloco no Linux, ou seja, tudo relaci
   lsblk -o NAME,SIZE,FSTYPE,UUID,MOUNTPOINT --> Mostrar UUID
   lsblk -d --> Ver apenas discos
   lsblk -a --> Ver em formato mais detalhado
+
+lshw --> é um comando usado para listar informações detalhadas sobre o hardware do sistema no Linux.
+  lshw -short --> Mostrar em formato resumido
+  lshw -class cpu --> Filtrar por CPU
+  lshw -class memory --> Filtrar por memory
+  lshw -class disk --> Filtrar por disk
+  lshw -class network --> Filtrar por network
+  lshw -html > hardware.html --> Gerar saída em HTML
 
 lsmod --> serve para listar os módulos do kernel Linux que estão carregados no momento.
 
@@ -220,6 +237,17 @@ tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único
   -j -- Comprime o arquivo usando bzip2 (maior compressão, mas mais lento).
   -C -- Especifica um diretório de destino para a extração. 
 
+targetcli --> é uma ferramenta de linha de comando usada para configurar um servidor iSCSI no Linux, baseada no framework moderno LIO (Linux-IO Target).
+  targetcli --> Você entra em um shell tipo: Navegação estilo diretórios (cd, ls)
+  /backstores/block create disk01 /dev/sdb --> Criar backend (disco)
+  /iscsi create iqn.2026-01.local:storage --> Criar target iSCSI
+  /iscsi/iqn.2026-01.local:storage/tpg1/luns create /backstores/block/disk01 --> Criar LUN
+  /iscsi/iqn.2026-01.local:storage/tpg1/acls create iqn.client --> Liberar acesso
+  set attribute authentication=0 --> liberar geral
+  saveconfig --> Salvar configuração
+  /etc/target/saveconfig.json --> Configuração persistente:
+  systemctl enable --now target --> Serviço
+  
 touch -- Cria arquivos vazios. Ex.: touch data1 data2
 
 useradd -- Cria um usuário local
