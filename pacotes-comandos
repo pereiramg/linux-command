@@ -28,6 +28,8 @@ sudo dnf install sysstat -y --> é um pacote com várias ferramentas importantes
   pidstat → uso por processo
   sadf → exporta dados (CSV, JSON, etc.)
 =================
-
-
+sudo dnf install smartmontools --> é um pacote de ferramentas para monitorar a saúde de discos (HDD/SSD) usando a tecnologia S.M.A.R.T..
+=================
+sudo dnf install targetcli --> é uma ferramenta de linha de comando usada para configurar um servidor iSCSI no Linux, baseada no framework moderno LIO (Linux-IO Target).
+=================
 
