@@ -1,0 +1,101 @@
+🧠 O que é LVM?
+👉 Em vez de usar partições fixas (/dev/sda1, /dev/sdb1), o LVM cria uma camada lógica:
+  Discos → PV → VG → LV → Filesystem → /data
+=========
+🧩 Conceitos principais
+🔹 PV (Physical Volume)
+👉 Disco ou partição
+Ex: /dev/sdb1
+=========
+🔹 VG (Volume Group)
+👉 Grupo de discos (pool de espaço)
+Ex: vg_data
+=========
+🔹 LV (Logical Volume)
+👉 “partição virtual”
+Ex: /dev/vg_data/lv_backup
+=========
+⚙️ Fluxo básico (produção)
+  Disco → PV → VG → LV → ext4/xfs → mount
+=========
+🖥️ COMANDOS PRINCIPAIS
+📌 1. Criar PV
+  pvcreate /dev/sdb1
+=========
+📌 2. Criar VG
+  vgcreate vg_data /dev/sdb1
+=========
+📌 3. Criar LV
+  lvcreate -L 10G -n lv_data vg_data
+ou usar todo espaço:
+  lvcreate -l 100%FREE -n lv_data vg_data
+=========
+📌 4. Criar filesystem
+  mkfs.xfs /dev/vg_data/lv_data
+=========
+📌 5. Montar
+  mount /dev/vg_data/lv_data /data
+=========
+🔎 Comandos de consulta
+Ver PV
+  pvs
+Ver VG
+  vgs
+Ver LV
+  lvs
+👉 Forma detalhada:
+  pvdisplay
+  vgdisplay
+  lvdisplay
+=========
+🔄 EXPANSÃO (ponto forte do LVM)
+📌 Adicionar novo disco
+  pvcreate /dev/sdc1
+  vgextend vg_data /dev/sdc1
+
+📌 Expandir LV
+  lvextend -l +100%FREE /dev/vg_data/lv_data
+
+📌 Expandir filesystem
+
+XFS: xfs_growfs /data
+ext4: resize2fs /dev/vg_data/lv_data
+=========
+🔽 REDUÇÃO (cuidado ⚠️)
+  ext4 permite diminuir
+  XFS NÃO permite ❗
+=========
+🧯 Remover volumes
+Remover LV
+  lvremove /dev/vg_data/lv_data
+Remover VG
+  vgremove vg_data
+Remover PV
+  pvremove /dev/sdb1
+=========
+🎯 Para que usar na prática?
+  💾 Expandir disco sem downtime
+  📦 Agrupar vários discos
+  🔄 Flexibilidade total de storage
+  ☁️ Muito usado em cloud e servidores
+=========
+🔄 Integração comum (produção)
+Disco → RAID (mdadm) → LVM → XFS → /data
+ou:
+Disco → LUKS → LVM → XFS
+=========
+⚠️ Pontos importantes
+  Sempre ter backup
+  XFS não reduz
+  Alterações erradas podem impactar dados
+  Usar lsblk antes de qualquer operação
+=========
+💡 Dica nível DevOps
+Para ver tudo rapidamente:
+  lsblk
+  pvs
+  vgs
+  lvs
+=========
+🧠 Resumo direto
+  O LVM2 permite gerenciar discos de forma flexível, criando volumes que podem ser expandidos e administrados dinamicamente.
