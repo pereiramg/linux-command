@@ -7,7 +7,7 @@
     🟣 .timer → agendamentos (tipo cron)
     ⚙️ .mount, .automount, .swap
 =========================================================
-Hierarquia importante (muito cobrado em troubleshooting)
+Hierarquia
   Caminho	                Função
   /etc/systemd/system	    customizações / overrides
   /run/systemd/system	    runtime (temporário)
@@ -24,6 +24,7 @@ Editar corretamente (não direto no /lib):
   /etc/systemd/system/sshd.service.d/
 
 =========================================================
+
 GRUB
 /boot/grub --> É o diretório onde ficam arquivos de configuração e suporte do GRUB. Ele é usado antes do sistema operacional carregar totalmente.
 
