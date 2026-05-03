@@ -1,0 +1,65 @@
+
+
+/etc/sysconfig/network-scripts/ifcfg-<interface>
+
+====================================================================
+Estrutura do arquivo ifcfg-xxx
+  TYPE=Ethernet
+  BOOTPROTO=static
+  NAME=ens192
+  DEVICE=ens192
+  ONBOOT=yes
+  IPADDR=192.168.1.10
+  PREFIX=24
+  GATEWAY=192.168.1.1
+  DNS1=8.8.8.8
+  DNS2=8.8.4.4
+======================================================================
+Principais parâmetros
+  DEVICE → nome da interface
+  NAME → nome lógico
+  TYPE → tipo (Ethernet, Bridge, Bond, etc.)
+  ONBOOT=yes → sobe no boot / ONBOOT=no → não sobe automaticamente
+  BOOTPROTO=dhcp
+  BOOTPROTO=static
+  IPADDR=192.168.1.10
+  PREFIX=24
+  GATEWAY=192.168.1.1
+  DNS1=8.8.8.8
+  DNS2=8.8.4.4
+  IPV6INIT=yes / IPV6INIT=no
+  MTU=1500
+  HWADDR=00:11:22:33:44:55
+  NM_CONTROLLED=yes / Se no, o NetworkManager ignora a interface
+=======================================================================
+==== Comandos ===
+  nmcli connection reload
+  nmcli connection up ens192
+  systemctl restart NetworkManager
+
+  nmcli con show
+  nmcli con mod ens192 ipv4.addresses 192.168.1.10/24
+  nmcli con up ens192
+
+  nmcli con mod ens192 ipv4.addresses 192.168.1.10/24
+  nmcli con mod ens192 ipv4.gateway 192.168.1.1
+  nmcli con mod ens192 ipv4.dns "8.8.8.8 8.8.4.4"
+  nmcli con mod ens192 ipv4.method manual
+  nmcli con up ens192
+  nmcli con mod ens192 +ipv4.routes "10.0.0.0/24 192.168.1.1"
+
+  nmcli con add type ethernet ifname ens224 con-name rede2 ip4 192.168.2.10/24 gw4 192.168.2.1
+=======================================================================
+====== IMPORTANTE (RHEL 8+ / AlmaLinux 9) ======
+ 👉 O modelo ifcfg-xxx está sendo gradualmente descontinuado
+O padrão atual usa:
+arquivos em:
+  /etc/NetworkManager/system-connections/
+
+nmcli device status
+ip a
+ip route
+
+
+
+
