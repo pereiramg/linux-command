@@ -80,6 +80,17 @@ iftop --> monitorar o tráfego de rede em tempo real
   -P --> Mostrar porta
   -N --> Mostrar IP e hostname
 
+iscsiadm --> Descobrir servidores iSCSI (targets) / Conectar a discos remotos / Fazer o disco aparecer como local (/dev/sdb)
+              Reconectar automaticamente no boot
+  iscsiadm -m discovery -t sendtargets -p 192.168.1.10 --> Descobrir targets
+  iscsiadm -m node -T iqn.2026-01.local:storage -p 192.168.1.10 --login --> Conectar ao target
+  iscsiadm -m session --> Ver sessões
+  iscsiadm -m node --logout --> Desconectar
+  iscsiadm -m node --op update -n node.startup -v automatic --> Para conectar automaticamente
+  /etc/iscsi/iscsid.conf --> Arquivos importantes
+  /var/lib/iscsi/ --> Banco de nodes
+  
+
 ip --> Com ele você consegue: Ver e configurar interfaces de rede / Gerenciar endereços IP / Manipular rotas (gateway) / Ver conexões e regras de rede
         Trabalhar com VLANs, bridges e túneis
   ip addr / ip a --> Ver interfaces e IPs
