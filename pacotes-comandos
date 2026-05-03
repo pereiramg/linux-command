@@ -17,6 +17,9 @@ sudo dnf install hdparm --> comando usado no Linux para consultar e ajustar par�
 ================
 sudo dnf install iftop --> monitorar o tráfego de rede em tempo real
 ================
+sudo dnf install iscsi-initiator-utils -y --> é o pacote que transforma um servidor Linux em um cliente iSCSI (initiator) — ou seja, 
+                                ele permite conectar em storage remoto via rede (como o que você criaria com targetcli ou tgt).
+================
 sudo dnf install lsof --> Ferramenta para descobrir quem está usando o quê no sistema — seja arquivo, porta ou recurso.
 =================
 sudo dnf install mtr --> Ferramenta de rede que combina o ping + traceroute em tempo real.
