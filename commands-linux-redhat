@@ -37,10 +37,47 @@ cp --> Copia um arquivo ou diretorio
 curl -- Usado para fazer requisição http
   -s -- modo silencioso, suprime mensagens de progressos ou erros
 
+dd --> é um comando de baixo nível usado para copiar dados diretamente entre dispositivos e arquivos, byte a byte
+  dd if=origem of=destino [opções] --> Sintaxe básica
+    Parâmetros principais:
+      if= → input file (origem)
+      of= → output file (destino)
+      bs= → tamanho do bloco
+      count= → quantidade de blocos
+      conv= --> Deve tratar/transformar os dados durante a cópia
+        notrunc --> Não truncar o arquivo de destino - dd if=arquivo of=saida conv=notrunc
+        noerror --> Continua mesmo se ocorrer erro de leitura - dd if=/dev/sda of=backup.img conv=noerror
+        sync --> Preenche blocos com zeros em caso de erro - dd if=/dev/sda of=backup.img conv=noerror,sync
+        fsync --> Força gravação no disco ao final - dd if=arquivo of=saida conv=fsync
+        fdatasync --> Similar ao fsync, mas só dados (não metadados) - dd if=arquivo of=saida conv=fdatasync
+        ucase --> Converte para maiúsculo - dd if=texto.txt of=saida.txt conv=ucase
+        lcase --> Converte para minúsculo - dd if=texto.txt of=saida.txt conv=lcase
+        swab --> Troca bytes (endianness) - dd if=arquivo of=saida conv=swab
+  dd if=arquivo.txt of=copia.txt --> Copiar arquivo simples
+  dd if=/dev/sda of=/dev/sdb bs=4M --> Clonar disco inteiro
+  dd if=/dev/sda of=backup.img bs=4M --> Criar imagem de disco
+  dd if=backup.img of=/dev/sda bs=4M --> Restaurar imagem
+  dd if=/dev/zero of=teste.img bs=1M count=1024 --> Criar arquivo de teste (1GB)
+  dd if=/dev/sda of=/dev/null bs=4M --> Teste de leitura
+  dd if=/dev/zero of=/dev/sdb bs=4M --> Apagar disco (zero fill)
+  dd if=/dev/zero of=/dev/sdb bs=4M status=progress --> Versão mais segura para apagar disco
+  dd if=/dev/urandom of=/dev/sdb bs=4M --> Apagar com dados aleatórios
+  dd if=/dev/sda of=backup.img bs=4M status=progress --> Mostrar progresso
+
 df --> Disk Free, onde lista meus filesystems
   -h --> Formato legível (K, M, G)
   -T --> Mostrar tipo de filesystem
 
+dig --> como um nome de domínio está sendo resolvido
+  dig google.com --> Uso básico
+  dig www.google.com +trace --> mostra todo o caminho da resolução, desde os servidores raiz até o destino final.
+  dig google.com MX --> Consultar MX (email)
+  dig google.com NS --> Consultar NS (nameservers)
+  dig google.com TXT --> Consultar TXT
+  dig @8.8.8.8 google.com --> Usar DNS específico
+  dig +short google.com --> Mostrar apenas resposta (limpo)
+  dig -x 8.8.8.8 --> Consulta reversa (IP → nome)
+  
 dmesg --> Usado para visualizar as mensagens do kernel Linux, principalmente aquelas geradas durante o boot e eventos de hardware.
   dmesg -T --> Ver com timestamp legível
   dmesg | grep -i error --> Filtrar erros
@@ -101,6 +138,7 @@ ip --> Com ele você consegue: Ver e configurar interfaces de rede / Gerenciar e
   ip route --> Ver rotas (gateway)
   ip route add default via 192.168.1.1 --> Adicionar rota padrão
   ip neigh --> Ver tabela de vizinhos (ARP)
+  ip -s link --> mostrar estatísticas detalhadas das interfaces de rede
 
 journalctl --> ferramenta usada em sistemas Linux com systemd para visualizar e consultar logs do sistema de forma centralizada.
   journalctl -n 50 --> Ver logs recentes
@@ -202,6 +240,37 @@ rm -- Deletar
 
 rmdir -- Remover um diretorio vazio
 
+rsync --> para copiar e sincronizar arquivos/diretórios, tanto localmente quanto pela rede
+          O rsync lê filtros na ordem:
+            rsync -av \
+            --include="*/" \ #--  */ → inclui diretórios
+          --include="*.log" \ #-- *.log → inclui logs
+          --exclude="*" \ #-- * → exclui resto
+          /data/ /backup/
+  -a = archive (preserva tudo)
+  -v = verbose
+  -z --> Comprime os dados durante a transferência
+  -u --> Copia somente arquivos mais novos
+  -r --> Copia diretórios recursivamente - Já está incluído no -a, então é redundante
+  -P --> Combinação de --progress → mostra progresso / --partial → permite retomar transferência
+  --delete --> Remove no destino tudo que não existe mais na origem
+  --dry-run --> Testar sem executar
+  --progress --> Mostrar progresso
+  --include --> incluir arquivos ou diretórios específicos durante a sincronização
+  --exclude --> Exclui arquivos ou diretorios
+  rsync [opções] origem destino --> Sintaxe básica
+  rsync -av /data /backup --> Copiar diretório local
+  rsync -av /data/ /backup --> copia apenas o conteúdo dentro do /data/
+  rsync -av /data user@192.168.1.10:/backup --> Sincronizar com outro servidor (SSH)
+  rsync -av user@192.168.1.10:/data /backup --> Copiar de remoto para local
+  rsync -av --progress /data /backup --> Mostrar progresso
+  rsync -av --delete /data /backup --> Sincronização “espelho” - Remove no destino o que não existe na origem
+  rsync -av --exclude="*.log" /data /backup --> Ignorar arquivos
+  rsync -av --dry-run /data /backup --> Testar sem executar (dry-run)
+  rsync -av --delete --dry-run /data /backup --> Mostra o que será apagado/copiado sem executar
+  rsync -azurP /data user@192.168.1.10:/backup --> 
+  rsync -av --include="*.txt" --exclude="*" /data /backup --> copia apenas .txt e ignora todo o resto
+
 sar --> Ele permite ver histórico e tempo real de: CPU / Memória / Disco (I/O) / Rede / Swap / Load average
   sudo systemctl enable --now sysstat -- > para funcionar o serviço precisa estar ativo
   sar -u 1 5 --> Mostra uso da CPU a cada 1 segundo, 5 vezes.
@@ -246,7 +315,21 @@ tar -- Para arquivar e gerenciar múltiplos arquivos ou diretórios em um único
   -v -- Modo verboso, mostra o progresso.
   -z -- Comprime o arquivo usando gzip.
   -j -- Comprime o arquivo usando bzip2 (maior compressão, mas mais lento).
-  -C -- Especifica um diretório de destino para a extração. 
+  -C -- Especifica um diretório de destino para a extração.
+  --no-same-owner --> não preserve o dono original (owner) dos arquivos / atribua os arquivos ao usuário atual
+  tar -xvf backup.tar --no-same-owner -- > Exemplo com o no some owner
+  tar [opções] arquivo.tar arquivos/ --> Estrutura básica
+  tar -cvf backup.tar /data --> Criar arquivo .tar (sem compressão)
+  tar -czvf backup.tar.gz /data --> Criar .tar.gz (gzip)
+  tar -cjvf backup.tar.bz2 /data --> Criar .tar.bz2 (bzip2)
+  tar -xvf backup.tar --> Extrair .tar
+  tar -xzvf backup.tar.gz --> Extrair .tar.gz
+  tar -xzvf backup.tar.gz -C /tmp --> Extrair em diretório específico
+  tar -tvf backup.tar.gz --> Listar conteúdo sem extrair
+  tar -xvf backup.tar arquivo.txt --> Extrair arquivo específico
+  tar --exclude="*.log" -czvf backup.tar.gz /data --> Excluir arquivos ao criar
+  tar -uvf backup.tar arquivo_novo.txt --> Atualizar arquivo tar
+  tar -czvf backup.tar.gz /etc /var /home --> Compactar múltiplos diretórios
 
 targetcli --> é uma ferramenta de linha de comando usada para configurar um servidor iSCSI no Linux, baseada no framework moderno LIO (Linux-IO Target).
   targetcli --> Você entra em um shell tipo: Navegação estilo diretórios (cd, ls)
@@ -258,7 +341,18 @@ targetcli --> é uma ferramenta de linha de comando usada para configurar um ser
   saveconfig --> Salvar configuração
   /etc/target/saveconfig.json --> Configuração persistente:
   systemctl enable --now target --> Serviço
-  
+
+tcpdump --> linha de comando usada para capturar e analisar pacotes de rede em tempo real
+  tcpdump -i eth0 --> Capturar em uma interface
+  tcpdump -n -i eth0 --> Não resolver DNS (mais rápido)
+  tcpdump host 192.168.1.10 --> Filtrar por IP
+  tcpdump port 80 --> Filtrar por porta
+  tcpdump icmp --> Filtrar por protocolo
+  tcpdump -i eth0 src host 192.168.1.10 --> Ver apenas saída (TX)
+  tcpdump -i eth0 dst host 192.168.1.10 --> Ver apenas entrada (RX)
+  tcpdump -i eth0 -w captura.pcap --> Capturar e salvar arquivo
+  tcpdump -r captura.pcap --> Ler arquivo capturado
+
 touch -- Cria arquivos vazios. Ex.: touch data1 data2
 
 useradd -- Cria um usuário local
@@ -267,4 +361,3 @@ useradd -- Cria um usuário local
 watch -- Executa outro comando repetidamente, mostrando o resultado na tela
   watch -n 1 ss -naot --> Atualizar mais rápido
   watch -d ss -naot --> Destacar mudanças
-
