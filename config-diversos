@@ -3,4 +3,22 @@
 /etc/sudoers.d/suders-[user]
 	meu-user	ALL=(ALL)	NOPASSWD: ALL
 
-=======
+=============== HOSTS ===============
+cat /etc/hosts
+	A arquivo hosts do Linux
+
+================ MOTD ================
+MOTD = Message Of The Day
+É um texto que aparece quando você entra via SSH ou terminal.
+
+Editar o arquivo: vi /etc/motd
+Exemplo:
+
+************************************
+*   SERVIDOR PRODUÇÃO - ATENÇÃO     *
+*   Acesso monitorado              *
+************************************
+
+Em sistemas modernos, o MOTD pode ser gerado automaticamente via:
+	/etc/motd.d/
+
