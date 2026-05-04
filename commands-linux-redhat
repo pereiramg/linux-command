@@ -189,6 +189,14 @@ systemctl --> É o comando principal usado para interagir com o systemd, ou seja
 
 sudoedit --> forma segura de editar arquivos como root usando o sudo, sem abrir diretamente o arquivo com permissões elevadas.
 
+mesg --> é usado para permitir ou bloquear que outros usuários enviem mensagens para o seu terminal no Linux
+  mesg --> Ver status atual / y = permitido / n = bloqueado
+  mesg y --> Permitir mensagens
+  mesg n --> Bloquear mensagens
+  write usuario --> para começar a conversa
+                  Depois digite a mensagem
+                  Para finalizar: Ctrl + D
+
 mv - Mover aquivo ou pasta
 
 mkdir -- Criação de diretorios
