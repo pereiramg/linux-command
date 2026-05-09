@@ -3,12 +3,17 @@
 Estrutura do arquivo
   <dispositivo> <ponto_de_montagem> <tipo> <opções> <dump> <fsck>
 
+Exemplos:
+  /dev/sda1  /dados  ext4  defaults  0  2
+  UUID=1234-ABCD  /backup  ext4  defaults  0  2
+  /dev/sda2  none  swap  sw  0  0
+  /dev/sdb1  /arquivos  ext4  defaults,noatime  0  2
 ======== Dispositivo ========
 Pode ser:
   /dev/sda1
   UUID=xxxx
   LABEL=nome
-👉 Melhor prática: usar UUID (obtido com blkid)
+Melhor prática: usar UUID (obtido com blkid)
 
 ======== Ponto de montagem ========
 Onde será montado:
