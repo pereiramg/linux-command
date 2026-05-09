@@ -3,6 +3,13 @@
 &> /dev/null -- Local de descarte de saidas validas e quanto erros
 <<< --> redireciona o conteudo da variavel
 
+arp --> usado no Linux para visualizar e manipular a tabela ARP (Address Resolution Protocol), que faz o mapeamento entre
+        Endereço IP ↔ Endereço MAC
+  arp -n --> Ver tabela ARP
+  arp -s 192.168.1.50 aa:bb:cc:dd:ee:ff --> Adicionar entrada manual (estática)
+  arp -d 192.168.1.50 --> Remover entrada
+  arp -a --> Ver formato completo
+  
 awk --> Trabalha linha a linha e divide cada linha em campos (colunas)
   $0 --> linha inteira
   $1 --> primeira coluna
@@ -140,6 +147,7 @@ ip --> Com ele você consegue: Ver e configurar interfaces de rede / Gerenciar e
   ip route --> Ver rotas (gateway)
   ip route add default via 192.168.1.1 --> Adicionar rota padrão
   ip neigh --> Ver tabela de vizinhos (ARP)
+  ip neigh show --> Ver tabela de vizinhos (ARP
   ip -s link --> mostrar estatísticas detalhadas das interfaces de rede
 
 journalctl --> ferramenta usada em sistemas Linux com systemd para visualizar e consultar logs do sistema de forma centralizada.
