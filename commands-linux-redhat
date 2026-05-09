@@ -117,6 +117,9 @@ iftop --> monitorar o tráfego de rede em tempo real
   -P --> Mostrar porta
   -N --> Mostrar IP e hostname
 
+insmod --> Usado para carregar manualmente um módulo do kernel no Linux
+  insmod modulo.ko --> Sintaxe básica
+  
 iscsiadm --> Descobrir servidores iSCSI (targets) / Conectar a discos remotos / Fazer o disco aparecer como local (/dev/sdb)
               Reconectar automaticamente no boot
   iscsiadm -m discovery -t sendtargets -p 192.168.1.10 --> Descobrir targets
@@ -127,7 +130,6 @@ iscsiadm --> Descobrir servidores iSCSI (targets) / Conectar a discos remotos / 
   /etc/iscsi/iscsid.conf --> Arquivos importantes
   /var/lib/iscsi/ --> Banco de nodes
   
-
 ip --> Com ele você consegue: Ver e configurar interfaces de rede / Gerenciar endereços IP / Manipular rotas (gateway) / Ver conexões e regras de rede
         Trabalhar com VLANs, bridges e túneis
   ip addr / ip a --> Ver interfaces e IPs
@@ -149,6 +151,8 @@ journalctl --> ferramenta usada em sistemas Linux com systemd para visualizar e 
   journalctl --since "2026-04-29 14:00" / journalctl --since yesterday --> Filtrar por data
   journalctl -p err --> Filtrar por erro
 
+lsmod --> listar todos os módulos do kernel que estão atualmente carregados no sistema.
+  
 localectl status -- Para verificar como está a config atual
   localectl set-keymap br-abnt2 -- alterar para o abnt2
 
@@ -181,6 +185,10 @@ lsof --> Arquivos abertos por processos / Portas de rede em uso / Qual processo 
   lsof /var/log/messages --> Ver qual processo está usando um arquivo
   lsof -u galdper --> Ver arquivos abertos por um usuário
   lsof | grep deleted --> Ver arquivos deletados ainda em uso
+
+modprobe --> usado para carregar e remover módulos do kernel, resolvendo automaticamente as dependências
+  modprobe nome_modulo --> Carregar um módulo
+  modprobe -r nome_modulo --> Remover um módulo
 
 systemctl --> É o comando principal usado para interagir com o systemd, ou seja, para controlar serviços e o estado do sistema no Linux
   systemctl cat nome_do_servico --> Se um serviço está estranho. Ele mostra: arquivo original (/lib) / overrides (/etc)
@@ -361,11 +369,17 @@ tcpdump --> linha de comando usada para capturar e analisar pacotes de rede em t
   tcpdump -i eth0 -w captura.pcap --> Capturar e salvar arquivo
   tcpdump -r captura.pcap --> Ler arquivo capturado
 
-touch -- Cria arquivos vazios. Ex.: touch data1 data2
+touch --> Cria arquivos vazios. Ex.: touch data1 data2
 
-useradd -- Cria um usuário local
-  -m -- Cria o diretorio home do usuário
+udevadm --> Para monitorar eventos de hardware em tempo real no Linux
+  udevadm monitor --> Uso básico
+  udevadm monitor --property --> Mostrar propriedades completas
+  udevadm monitor --subsystem-match=block --> Filtrar por subsistema
+  udevadm monitor --subsystem-match=usb --> Filtrar USB
 
-watch -- Executa outro comando repetidamente, mostrando o resultado na tela
+useradd --> Cria um usuário local
+  -m --> Cria o diretorio home do usuário
+
+watch --> Executa outro comando repetidamente, mostrando o resultado na tela
   watch -n 1 ss -naot --> Atualizar mais rápido
   watch -d ss -naot --> Destacar mudanças
