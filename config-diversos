@@ -22,4 +22,12 @@ Exemplo:
 Em sistemas modernos, o MOTD pode ser gerado automaticamente via:
 	/etc/motd.d/
 ================================================
-
+Descrição do TOP
+	us --> CPU usada por aplicações (user space)
+	sy --> (system) CPU usada pelo kernel
+	ni --> (nice) processos com prioridade alterada
+	id --> (idle) CPU ociosa (Esse é o mais importante aqui)
+	wa --> (iowait) tempo esperando I/O (disco)
+	hi --> (hardware interrupt) interrupções de hardware
+	si --> (software interrupt) interrupções de software
+	st -->  (steal) tempo “roubado” (virtualização)
