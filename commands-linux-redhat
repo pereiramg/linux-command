@@ -205,10 +205,10 @@ mesg --> é usado para permitir ou bloquear que outros usuários enviem mensagen
                   Depois digite a mensagem
                   Para finalizar: Ctrl + D
 
-mv - Mover aquivo ou pasta
+mv --> Mover aquivo ou pasta
 
-mkdir -- Criação de diretorios
-  -p -- Cria toda a cadeia de diretorios ex.: /devops/app/src
+mkdir --> Criação de diretorios
+  -p --> Cria toda a cadeia de diretorios ex.: /devops/app/src
 
 mount --> usado no Linux para montar sistemas de arquivos, ou seja, tornar um disco, partição ou recurso acessível dentro do sistema
   mount OU mount | grep /dev --> Ver montagens atuais
@@ -217,7 +217,17 @@ mount --> usado no Linux para montar sistemas de arquivos, ou seja, tornar um di
   mount -o ro /dev/sdb1 /data --> Montar somente leitura
   mount -t nfs 192.168.1.10:/export /mnt --> Montar NFS
   umount /data | umount /dev/sdb1 --> Desmontar (unmount)
-  
+
+mpstat --> usado para monitorar o uso de CPU por núcleo (ou processador) no Linux
+  mpstat --> Uso básico
+  mpstat 1 --> Tempo real
+  mpstat -P ALL --> Mostra todos os cores individualmente
+    Explicação dos campos
+      %usr → uso por aplicações
+      %sys → uso pelo kernel
+      %idle → CPU ociosa
+      %iowait → espera por disco
+
 mt --> é uma ferramenta de rede que combina o ping + traceroute em tempo real.
   mtr -r google.com --> Rodar modo texto (sem interface interativa)
   mtr google.com --> Abre um interface interativa
@@ -379,6 +389,32 @@ udevadm --> Para monitorar eventos de hardware em tempo real no Linux
 
 useradd --> Cria um usuário local
   -m --> Cria o diretorio home do usuário
+
+vmstat --> usado para monitorar desempenho do sistema em tempo real
+  vmstat 1 --> Atualizar continuamente (mais usado)
+  Explicação dos campos : procs (processos)
+    r → processos prontos para CPU
+    b → processos bloqueados (I/O)
+  memory (memória)
+    swpd → swap usada
+    free → memória livre
+    buff → buffers
+    cache → cache
+  swap - valores altos = problema de memória
+    si → swap in (entrada da swap)
+    so → swap out (saída da swap)
+  io (disco)
+    bi → blocos lidos
+    bo → blocos escritos
+  system
+    in → interrupções
+    cs → troca de contexto
+  cpu
+    us → user (aplicações)
+    sy → system (kernel)
+    id → idle (ocioso)
+    wa → espera por I/O
+    st → steal (virtualização)
 
 watch --> Executa outro comando repetidamente, mostrando o resultado na tela
   watch -n 1 ss -naot --> Atualizar mais rápido
