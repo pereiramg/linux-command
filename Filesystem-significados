@@ -37,9 +37,10 @@ Como alterar corretamente - Arquivos de configuração ficam em:
 grub2-mkconfig -o /boot/grub/grub.cfg --> Depois de editar gerar novamente
 
 =========================================================
-
-
-
+Memoria compartilhada - Shared memory segment (shmmax)
+    /proc/sys/kernel/shmmax
+    sysctl kernel.shmmax=2147483648
+===========================================================
 
 
 
