@@ -1,0 +1,50 @@
+================= Processo de boot ========================
+maxcpus=1 --> É usado no boot do sistema para limitar quantas CPUs (núcleos) o Linux vai utilizar.
+	Geralmente no bootloader (GRUB):
+		/etc/default/grub
+	Exemplo:
+		GRUB_CMDLINE_LINUX="maxcpus=1"
+	Depois:
+		grub2-mkconfig -o /boot/grub2/grub.cfg
+
+======================= GRUB ===================================
+
+/boot/grub --> É o diretório onde ficam arquivos de configuração e suporte do GRUB. Ele é usado antes do sistema operacional carregar totalmente.
+
+BIOS: /boot/grub2/grub.cfg
+UEFI /boot/efi/EFI/redhat/grub.cfg
+
+Como alterar corretamente - Arquivos de configuração ficam em:
+  /etc/default/grub
+
+grub2-mkconfig -o /boot/grub/grub.cfg --> Depois de editar gerar novamente
+
+======================= zImage / bzImage ==========================================
+zImage
+  formato antigo
+  kernel comprimido menor
+  limitado em tamanho (~512 KB em arquiteturas antigas)
+  pouco usado hoje
+Carrega o kernel compactado em memória baixa. Por isso tinha uma limitação maior de tamanho, pois precisava caber naquela área inicial de memória.
+
+bzImage
+  NÃO significa bzip2
+  significa “big zImage”
+  suporta kernels maiores
+  usado em sistemas modernos
+  padrão atual no Linux
+Significa big zImage, não “bzip2 image”. Ele permite kernels maiores porque parte do kernel pode ser carregada em memória alta, acima da memória baixa tradicional.
+
+
+arch/x86/boot/
+  zImage
+  bzImage
+
+Uso no boot --> /boot/vmlinuz-<versão>
+  Esse arquivo normalmente é baseado em bzImage
+
+
+
+
+
+
