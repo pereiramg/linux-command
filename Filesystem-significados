@@ -25,21 +25,10 @@ Editar corretamente (não direto no /lib):
 
 =========================================================
 
-GRUB
-/boot/grub --> É o diretório onde ficam arquivos de configuração e suporte do GRUB. Ele é usado antes do sistema operacional carregar totalmente.
-
-BIOS: /boot/grub2/grub.cfg
-UEFI /boot/efi/EFI/redhat/grub.cfg
-
-Como alterar corretamente - Arquivos de configuração ficam em:
-  /etc/default/grub
-
-grub2-mkconfig -o /boot/grub/grub.cfg --> Depois de editar gerar novamente
-
-=========================================================
 Memoria compartilhada - Shared memory segment (shmmax)
     /proc/sys/kernel/shmmax
     sysctl kernel.shmmax=2147483648
+
 ===========================================================
 
 
