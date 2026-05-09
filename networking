@@ -31,6 +31,7 @@ Principais parâmetros
   MTU=1500
   HWADDR=00:11:22:33:44:55
   NM_CONTROLLED=yes / Se no, o NetworkManager ignora a interface
+  METRIC=50 --> A rota default com o MENOR valor de métrica (metric)
 =======================================================================
 ==== Comandos ===
   nmcli connection reload
@@ -48,6 +49,9 @@ Principais parâmetros
   nmcli con up ens192
   nmcli con mod ens192 +ipv4.routes "10.0.0.0/24 192.168.1.1"
 
+  nmcli connection modify eth0 ipv4.route-metric 50
+  nmcli connection up eth0
+
   nmcli con add type ethernet ifname ens224 con-name rede2 ip4 192.168.2.10/24 gw4 192.168.2.1
 =======================================================================
 ====== IMPORTANTE (RHEL 8+ / AlmaLinux 9) ======
@@ -60,6 +64,20 @@ nmcli device status
 ip a
 ip route
 
+============================================================
+No linux, eu posso ter varias interfaces e cada uma com um GTW de sua vlan.
+A grande ponto aqui é configurar o parametro METRIC nas interfaces, pois é ele quem vai determinar
+  qual será o defaulf.
+A interface que estiver com o valor menor, será o GTW default
 
+
+============================= Wi-Fi ===============================
+
+iw --> é uma ferramenta para configuração e inspeção de dispositivos wireless (Wi-Fi) no Linux
+  iw phy phy0 info --> mostra informações detalhadas do hardware Wi-Fi (camada física).
+    iw → ferramenta de gerenciamento wireless
+    phy → refere-se ao dispositivo físico Wi-Fi
+    phy0 → identificador da placa wireless (pode ser phy0, phy1, etc.)
+    info → exibe todas as capacidades e detalhes
 
 
