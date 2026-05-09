@@ -36,7 +36,7 @@ As mais comuns:
   noexec → não executa binários
   nosuid → ignora SUID
   noatime → melhora performance (não atualiza access time)
-  _netdev → necessário para discos de rede
+  _netdev → necessário para discos de rede - iSCSI
 
 ======== Dump ========
 Quase sempre:
