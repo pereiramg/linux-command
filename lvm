@@ -99,3 +99,6 @@ snapshot de um LV
     -n snap_backup → nome do snapshot
     /dev/vg_dados/lv_dados → volume original
 ==========================================================
+
+tune2fs -L root /dev/sda1 --> define (ou altera) o rótulo (label) do sistema de arquivos na partição /dev/sda1 para root
+
