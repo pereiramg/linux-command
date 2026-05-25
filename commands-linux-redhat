@@ -213,7 +213,10 @@ mesg --> é usado para permitir ou bloquear que outros usuários enviem mensagen
                   Depois digite a mensagem
                   Para finalizar: Ctrl + D
 
-mv --> Mover aquivo ou pasta
+mv --> Mover aquivo ou pasta, renomear
+  Exemplos:
+    mv pasta1 pasta_backup
+    mv arquivo.txt /backup/arquivo_old.txt
 
 mkdir --> Criação de diretorios
   -p --> Cria toda a cadeia de diretorios ex.: /devops/app/src
